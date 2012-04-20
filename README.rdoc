@@ -1,2 +1,13 @@
-= TODO
+= D3MPQ
+
+== "Diablo 3" data mining
+Parsing data out of Diablo 3.
+
+== Working
+  * Parsing the StringList
+
+== NOTE
+  * No data is provided in this repo.
+  * You need to read the MPQs by yourself for parsing!
+  * (Hint: hava a look at the spec/integration/ dir)
 

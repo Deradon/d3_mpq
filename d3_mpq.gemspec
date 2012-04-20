@@ -11,8 +11,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Patrick Helm"]
   s.email       = ["deradon87@gmail.com"]
   s.homepage    = "https://github.com/Deradon/d3_mpq"
-  s.summary     = "TODO"
-  s.description = "TODO"
+  s.summary     = '"Diablo 3" data mining'
+  s.description = "Parsing data out of Diablo 3."
 
 #  s.executables   = ["d3_mpq"]
   s.files         = Dir["{bin,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
