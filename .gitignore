@@ -1,6 +1,7 @@
 .bundle/
+**~
+analyze/
 log/*.log
 pkg/
 spec/fixtures/
-**~
 

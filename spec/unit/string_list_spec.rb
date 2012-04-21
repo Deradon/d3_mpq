@@ -1,10 +1,11 @@
 require 'spec_helper'
 
 describe D3MPQ::StringList do
-  let(:item_sets) { File.open("spec/fixtures/StringList/ItemSets.stl") }
+  let(:io) { File.open("spec/fixtures/StringList/ItemSets.stl") }
 
   before(:all) do
-    subject.read(item_sets)
+    subject.read(io)
+#    BinData::trace_reading { subject.read(io) }
   end
 
   its(:items) { should be_a_kind_of(BinData::Array) }

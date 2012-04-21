@@ -7,11 +7,17 @@ module D3MPQ::CoreData::GameBalance
 
     # File Header
     skip    :length => 0x120
-    string  :excel_file_name, :length => 0x100
+
+    string  :excel_file_name, :length => 0x100, :trim_padding => true
     uint32  :identifier
-    array   :numbers, :type => :uint32, :read_until => lambda { element != 0 && element.offset < 0x370 }
+
+    array   :numbers,
+            :type       => :uint32,
+            :read_until => lambda { element != 0 && element.offset < 0x370 }
+
     uint32  :data_size
-    array   :type => :uint8, :read_until => lambda { element.offset + 0x01 == data_offset + 16  }
+    array   :type       => :uint8,
+            :read_until => lambda { element.offset + 0x01 == data_offset + 16  }
 
     def data_offset
       self.numbers.last
@@ -22,8 +28,10 @@ module D3MPQ::CoreData::GameBalance
     array :data_content, :initial_length => lambda { data_size / STRUCT_SIZE } do
       uint32  :check_value => lambda { value == 0x00 }
 
-      #TODO desc
-      string  :name, :read_length => 0x100, :trim_padding => true
+      string  :name,
+              :read_length  => 0x100,
+              :trim_padding => true
+
       uint32  :gold_value
       uint32  :min_level
       uint32  :seven_oh
