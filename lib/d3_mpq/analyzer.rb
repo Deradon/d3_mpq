@@ -3,7 +3,7 @@ module D3MPQ
     attr_reader :attributes
     require 'fileutils'
 
-    def initialize(parser, files, field = nil)
+    def initialize(parser, files, field = :content)
       @parser     = parser.new
       @files      = [*files]
       @field      = field

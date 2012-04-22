@@ -8,11 +8,6 @@ describe D3MPQ::CoreData::GameBalance::Items do
 #    BinData::trace_reading { subject.read(io) }
   end
 
-  specify do
-    p subject.content.last
-    pending
-  end
-
   its(:rest) { should == "" }
 end
 

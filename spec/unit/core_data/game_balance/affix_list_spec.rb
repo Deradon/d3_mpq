@@ -5,6 +5,7 @@ describe D3MPQ::CoreData::GameBalance::AffixList do
 
   before(:all) do
     subject.read(io)
+#    BinData::trace_reading { subject.read(io) }
   end
 
   specify do

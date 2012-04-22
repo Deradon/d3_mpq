@@ -1,39 +1,8 @@
 module D3MPQ::CoreData::GameBalance
-  class Items < BinData::Record
-    STRUCT_SIZE = 0x590
-    endian :little
+  class Items < Base
+    self.struct_size = 0x590
 
-    # HIDE
-    hide  :zero, :item_level_plus_one
-
-    # Padding
-    skip  :length => 0x120
-
-
-    string  :excel_file_name, :length => 0x100
-    uint32  :identifier
-
-    # Padding
-    hide  :numbers
-    array :numbers,
-          :type       => :uint32,
-          :read_until => lambda { element != 0 && element.offset < 0x370 }
-
-    def data_offset
-      numbers.last
-    end
-
-    uint32  :data_size
-
-#    array :type => :uint8, :read_until => lambda { element.offset + 0x01 == data_offset + 16 }
-
-
-    # ItemArray here
-    array :content,
-          :initial_length => lambda { data_size / STRUCT_SIZE },
-          :adjust_offset  => lambda{ data_offset + 16 } do
-
-      # Padding
+    content do
       zeroes
 
       # Name
