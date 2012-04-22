@@ -12,6 +12,7 @@ module D3MPQ
     def write
       dir = @parser.class.name.gsub("::", "_").downcase
       dir = File.join("analyze", dir)
+      dir = File.join(dir, @field.to_s) if @field
 
       FileUtils.mkdir_p File.join(dir)
       attributes.each do |a, v|
