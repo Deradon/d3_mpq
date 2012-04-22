@@ -13,7 +13,7 @@ module D3MPQ
       dir = @parser.class.name.gsub("::", "_").downcase
       dir = File.join("analyze", dir)
 
-      write_single_file(dir)
+      write_single_file("analyze")
 
       dir = File.join(dir, @field.to_s) if @field
       write_analyzed(dir)
@@ -30,7 +30,7 @@ module D3MPQ
         end
       end
 
-      path = File.join(dir, "base")
+      path = File.join(dir, @parser.class.name.split("::").last)
       File.open("#{path}.csv", 'w') { |f| f.write(s.join("\n")) }
     end
 
