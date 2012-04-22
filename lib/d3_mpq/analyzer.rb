@@ -12,12 +12,33 @@ module D3MPQ
     def write
       dir = @parser.class.name.gsub("::", "_").downcase
       dir = File.join("analyze", dir)
-      dir = File.join(dir, @field.to_s) if @field
 
+      write_single_file(dir)
+
+      dir = File.join(dir, @field.to_s) if @field
+      write_analyzed(dir)
+    end
+
+    def write_single_file(dir)
+      FileUtils.mkdir_p File.join(dir)
+
+      s = []
+      s << snapshots.first[@field].first.keys.join("|")
+      snapshots.each do |snapshot|
+        snapshot[@field].each do |e|
+          s << e.values.join("|")
+        end
+      end
+
+      path = File.join(dir, "base")
+      File.open("#{path}.csv", 'w') { |f| f.write(s.join("\n")) }
+    end
+
+    def write_analyzed(dir)
       FileUtils.mkdir_p File.join(dir)
       attributes.each do |a, v|
         path = File.join(dir, a.to_s)
-        s = v.map { |e| "#{e[:count]}|#{e[:value]}" }.join("\n")
+        s = "Count|Value\n" + v.map { |e| "#{e[:count]}|#{e[:value]}" }.join("\n")
         File.open("#{path}.csv", 'w') { |f| f.write(s) }
       end
     end
