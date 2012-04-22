@@ -8,7 +8,6 @@ module D3MPQ::CoreData::GameBalance
     string  :excel_file_name, :length => 0x100
     uint32  :identifier
 
-    # Padding
     hide  :numbers
     array :numbers,
           :type       => :uint32,
@@ -20,11 +19,10 @@ module D3MPQ::CoreData::GameBalance
 
     uint32  :data_size
 
-#    array :type => :uint8, :read_until => lambda { element.offset + 0x01 == data_offset + 16 }
+    # Padding
 
     class << self
       def content(&block)
-
         array :content,
               :initial_length => lambda { data_size / struct_size + fix_struct_size },
               :adjust_offset  => lambda{ data_offset + 16 },
