@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe D3MPQ::CoreData::GameBalance::ExperienceTable do
-  let(:io) { File.open("spec/fixtures/CoreData/GameBalance/ExperienceTable.gam") }
+describe D3MPQ::CoreData::GameBalance::ItemDropTable do
+  let(:io) { File.open("spec/fixtures/CoreData/GameBalance/ItemDropTable.gam") }
 
   before(:all) do
     subject.read(io)

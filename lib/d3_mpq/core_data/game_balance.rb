@@ -3,9 +3,16 @@ module D3MPQ::CoreData
     require "d3_mpq/core_data/game_balance/base"
 
     require "d3_mpq/core_data/game_balance/affix_list"
+    require "d3_mpq/core_data/game_balance/elite_modifiers"
     require "d3_mpq/core_data/game_balance/experience_table"
+    require "d3_mpq/core_data/game_balance/item_drop_table"
+    require "d3_mpq/core_data/game_balance/item_enhancements"
     require "d3_mpq/core_data/game_balance/items"
     require "d3_mpq/core_data/game_balance/item_types"
+    require "d3_mpq/core_data/game_balance/labels_global"
+    require "d3_mpq/core_data/game_balance/monster_affixes"
+    require "d3_mpq/core_data/game_balance/monster_names"
+    require "d3_mpq/core_data/game_balance/power_formula_tables"
   end
 end
 

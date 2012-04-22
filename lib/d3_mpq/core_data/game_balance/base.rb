@@ -11,7 +11,7 @@ module D3MPQ::CoreData::GameBalance
     hide  :numbers
     array :numbers,
           :type       => :uint32,
-          :read_until => lambda { element != 0 && element.offset < 0x370 }
+          :read_until => lambda { element != 0}# && element.offset < 0x370 }
 
     def data_offset
       numbers.last
