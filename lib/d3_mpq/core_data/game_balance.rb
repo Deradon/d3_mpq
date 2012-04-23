@@ -13,6 +13,8 @@ module D3MPQ::CoreData
     require "d3_mpq/core_data/game_balance/monster_affixes"
     require "d3_mpq/core_data/game_balance/monster_names"
     require "d3_mpq/core_data/game_balance/power_formula_tables"
+    require "d3_mpq/core_data/game_balance/set_item_bonuses"
+    require "d3_mpq/core_data/game_balance/socketed_effects"
   end
 end
 

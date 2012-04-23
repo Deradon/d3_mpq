@@ -8,7 +8,8 @@ describe D3MPQ::StringList do
 #    BinData::trace_reading { subject.read(io) }
   end
 
-  its(:items) { should be_a_kind_of(BinData::Array) }
-  specify { subject.items.count.should == 18 }
+  its(:content) { should be_a_kind_of(BinData::Array) }
+  its(:rest) { should == "" }
+  specify { subject.content.count.should == 18 }
 end
 

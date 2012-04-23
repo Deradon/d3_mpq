@@ -9,31 +9,49 @@ module D3MPQ
       @field      = field
     end
 
+    # Just write analyzed data to disc. (within /analyze)
     def write
-      dir = @parser.class.name.gsub("::", "_").downcase
-      dir = File.join("analyze", dir)
+      parser_name = @parser.class.name.gsub("::", "_").downcase
+      dir = File.join("analyze", parser_name)
 
-      write_single_file("analyze")
-
-      dir = File.join(dir, @field.to_s) if @field
-      write_analyzed(dir)
+      # HACK: if given StringListParser, write Output to differend directory
+      if parser_name == "d3mpq_stringlist"
+        dir = File.join("analyze", "StringList")
+        write_single_file(dir, @files.first.split("/").last)
+    else
+        write_single_file("analyze")
+        dir = File.join(dir, @field.to_s) if @field
+        write_analyzed(dir)
+      end
     end
 
-    def write_single_file(dir)
+    # Write output to a single file. (dir/filename)
+    # Using parser as filename if none is given.
+    def write_single_file(dir, filename = nil)
       FileUtils.mkdir_p File.join(dir)
 
+      # HACKY: NEED TO FIX
+      keys = snapshots.first.keys
+      keys = snapshots.first[@field].first.keys if @field
+
       s = []
-      s << snapshots.first[@field].first.keys.join("|")
+      s << keys.join("|")
       snapshots.each do |snapshot|
-        snapshot[@field].each do |e|
-          s << e.values.join("|")
+        # HACKY: NEED TO FIX
+        if @field
+          snapshot[@field].each { |e| s << e.values.join("|") }
+        else
+          snapshot.each { |e| s << [*e].join("|") }
         end
+
       end
 
-      path = File.join(dir, @parser.class.name.split("::").last)
+      filename ||= @parser.class.name.split("::").last
+      path = File.join(dir, filename)
       File.open("#{path}.csv", 'w') { |f| f.write(s.join("\n")) }
     end
 
+    # Writing multiple files to given dir.
     def write_analyzed(dir)
       FileUtils.mkdir_p File.join(dir)
       attributes.each do |a, v|

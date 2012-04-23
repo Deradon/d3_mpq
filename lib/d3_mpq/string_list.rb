@@ -29,7 +29,7 @@ module D3MPQ
     string  :read_length => 0x08
 
     # Content
-    array :items, :initial_length => lambda{ header_items.length } do
+    array :content, :initial_length => lambda{ header_items.length } do
       string  :identifier,
               :read_length    => lambda{header_items[index][:my_dummy][0].item_length },
               :adjust_offset  => lambda{header_items[index][:my_dummy][0].item_address + 16 },
@@ -50,6 +50,9 @@ module D3MPQ
               :adjust_offset  => lambda{header_items[index][:my_dummy][3].item_address + 16 },
               :trim_padding   => true
     end
+
+    hide  :rest
+    rest  :rest
   end
 end
 
