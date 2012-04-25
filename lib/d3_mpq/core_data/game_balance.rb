@@ -1,3 +1,4 @@
+# README: https://github.com/mooege/mooege/blob/master/src/Mooege/Common/MPQ/FileFormats/GameBalance.cs
 module D3MPQ::CoreData
   module GameBalance
     require "d3_mpq/core_data/game_balance/base"
