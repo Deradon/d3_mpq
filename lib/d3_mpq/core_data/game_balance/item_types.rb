@@ -28,9 +28,6 @@ module D3MPQ::CoreData::GameBalance
       uint32 :u8
       uint32 :u9
     end
-
-    hide  :rest
-    rest  :rest
   end
 end
 

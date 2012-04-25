@@ -13,9 +13,6 @@ module D3MPQ::CoreData::GameBalance
         float  "fp#{i}".intern
       end
     end
-
-    hide  :rest
-    rest  :rest
   end
 end
 

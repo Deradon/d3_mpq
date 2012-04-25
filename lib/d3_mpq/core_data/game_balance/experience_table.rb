@@ -71,9 +71,6 @@ module D3MPQ::CoreData::GameBalance
 #      skip    :length => 144
 
     end
-
-    hide  :rest
-    rest  :rest
   end
 end
 

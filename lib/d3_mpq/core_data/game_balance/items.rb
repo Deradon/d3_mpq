@@ -86,6 +86,14 @@ module D3MPQ::CoreData::GameBalance
       # TODO: Convert attributes to array
 
       # Attributes / ModCodes
+
+#0x00	DWord modCode;	// modCode (id)
+#0x04	DWord modParam1;	// param used for elemental dmg and resists
+#0x08	DWord modParam2;	// param
+#0x0C	DWord modParam2;	// param
+#0x10	DWord varDataOffset;	// variable data offset (from the start of the data section)
+#0x14	DWord varDataLength;	// variable data length
+
         # Attribute 1
         uint32  :u31_offset
         uint32  :u31_length
@@ -107,7 +115,7 @@ module D3MPQ::CoreData::GameBalance
         uint32  :u41_length
         uint32  :u41_val1
         uint32  :u41_val2   # none 0 x FF FF FF FF if Recipe
-        zeroes  :length => 2
+        ffs     :length => 2
 
 
       ffs     :length => 4
@@ -127,9 +135,6 @@ module D3MPQ::CoreData::GameBalance
 
       zeroes
     end
-
-    hide  :rest
-    rest  :rest
   end
 end
 

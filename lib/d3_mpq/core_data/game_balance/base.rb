@@ -2,31 +2,45 @@ module D3MPQ::CoreData::GameBalance
   class Base < BinData::Record
     endian :little
 
-    # Padding
-    skip  :length => 0x120
+    # MPQ - Header
+    uint32  :check_value => 0xDEADBEEF  # MPQ file magic number
+    uint32  :version_id                 # file type or version id (same for all *.gam files)
+    zeroes  :length => 2
+
+    # GAM - Header
+    uint32  :file_id
+    zeroes  :length => 2
+    uint32  :record_index               # record index for data offsets
+    string  :length => 0x100, :trim_padding => true, :check_value => "0000.gbi"
 
     string  :excel_file_name, :length => 0x100
     uint32  :identifier
 
-    hide  :numbers
-    array :numbers,
+    hide  :data_array_entries
+    array :data_array_entries,
           :type       => :uint32,
-          :read_until => lambda { element != 0}# && element.offset < 0x370 }
+          :read_until => lambda { element != 0}
 
+    # data start offset (relative to the starts of the GamHeader
     def data_offset
-      numbers.last
+      data_array_entries.last
     end
 
-    uint32  :data_size
+    # data size (number of bytes); does not include variable data
+    uint32  :data_num_bytes
 
     # Padding
 
     class << self
+      # Main method to use
       def content(&block)
         array :content,
-              :initial_length => lambda { data_size / struct_size + fix_struct_size },
-              :adjust_offset  => lambda{ data_offset + 16 },
+              :initial_length => lambda { data_num_bytes / struct_size + fix_struct_size },
+              :adjust_offset  => lambda { data_offset + 16 },
               &block
+
+        hide  :rest
+        rest  :rest
       end
 
       def struct_size

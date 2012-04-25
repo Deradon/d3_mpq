@@ -10,9 +10,6 @@ module D3MPQ::CoreData::GameBalance
 
       uint32  :ui1
     end
-
-    hide  :rest
-    rest  :rest
   end
 end
 

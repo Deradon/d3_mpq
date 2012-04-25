@@ -41,9 +41,6 @@ module D3MPQ::CoreData::GameBalance
 
       float   :fp10
     end
-
-    hide  :rest
-    rest  :rest
   end
 end
 

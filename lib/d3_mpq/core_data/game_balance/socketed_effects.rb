@@ -36,9 +36,6 @@ module D3MPQ::CoreData::GameBalance
 
       zeroes  :length => 192
     end
-
-    hide  :rest
-    rest  :rest
   end
 end
 

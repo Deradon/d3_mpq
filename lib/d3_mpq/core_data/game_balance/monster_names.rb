@@ -15,9 +15,6 @@ module D3MPQ::CoreData::GameBalance
               :trim_padding => true
 
     end
-
-    hide  :rest
-    rest  :rest
   end
 end
 

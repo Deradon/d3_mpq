@@ -11,13 +11,10 @@ module D3MPQ::CoreData::GameBalance
       skip  :length => 0xD0 - 4
     end
 
-    # TODO
-    194.times do |i|
-      float "fp#{i}".intern
-    end
-
-    hide  :rest
-    rest  :rest
+#    # Rest
+#    194.times do |i|
+#      float "fp#{i}".intern
+#    end
   end
 end
 

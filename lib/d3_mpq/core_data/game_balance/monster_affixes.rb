@@ -17,9 +17,6 @@ module D3MPQ::CoreData::GameBalance
       # TODO
       skip    :length => 0x210 - 16
     end
-
-    hide  :rest
-    rest  :rest
   end
 end
 
