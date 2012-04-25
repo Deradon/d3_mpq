@@ -1,3 +1,4 @@
+# README: http://www.d3inferno.com/Items.gam.html
 module D3MPQ::CoreData::GameBalance
   class Items < Base
     self.struct_size = 0x590
@@ -9,7 +10,7 @@ module D3MPQ::CoreData::GameBalance
       string  :name,:length => 0x100, :trim_padding => true
 
       uint32  :sno_actor
-      uint32  :type
+      uint32  :type_hash
 
       # Flags
       bit1  :check_value => 0x0
@@ -37,13 +38,13 @@ module D3MPQ::CoreData::GameBalance
       uint32 :durability_min
       uint32 :durability_delta
       uint32 :ref2
-      uint32 :sno_base_item
-      uint32 :sno_set
-      uint32 :sno_component_treasure_class
-      uint32 :sno_component_treasure_class_rare
-      uint32 :sno_rare_name_prefix_string_list
-      #SNORareNameSuffixStringList       //348
-
+      uint32 :sno_base_item                       # baseItemHash
+      uint32 :sno_set                             # setItemBonuses
+      uint32 :sno_component_treasure_class        # salvageCommon
+      uint32 :sno_component_treasure_class_rare   # salvageMagic
+                                                  # salvageRare
+      uint32 :sno_rare_name_prefix_string_list    # rareGroupPrefixId
+                                                  # rareGroupSuffixId
       zeroes
 
       uint32  :u09 #town scroll etc.
@@ -82,36 +83,47 @@ module D3MPQ::CoreData::GameBalance
       uint32  :u22
       zeroes  :length => 2
 
-      uint32  :u31
-      uint32  :u32
-      uint32  :u33
-      uint32  :u34
+      # TODO: Convert attributes to array
 
-      # Attributes ?
-      15.times do |i|
+      # Attributes / ModCodes
+        # Attribute 1
+        uint32  :u31_offset
+        uint32  :u31_length
+        uint32  :u31_val1
+        uint32  :u34_val2
         zeroes  :length => 2
-        uint32  "attr_#{i}_0".intern
-        uint32  "attr_#{i}_1".intern
-        uint32  "attr_#{i}_2".intern
-        uint32  "attr_#{i}_3".intern
-      end
 
-      ffs     :length => 6
+        # Attribute 2-15
+        14.times do |i|
+          uint32  "attr#{i}_offset".intern  # offset
+          uint32  "attr#{i}_length".intern  # val
+          uint32  "attr#{i}_val".intern  # val
+          ffs
+          zeroes  :length => 2
+        end
+
+        # Attribute 16 (Recipes)
+        uint32  :u41_offset
+        uint32  :u41_length
+        uint32  :u41_val1
+        uint32  :u41_val2   # none 0 x FF FF FF FF if Recipe
+        zeroes  :length => 2
+
+
+      ffs     :length => 4
 
       # Legendary Affixes
-      uint32be :affix1_ref
-      uint32be :affix2_ref
-      uint32be :affix3_ref
-      uint32be :affix4_ref
-      uint32be :affix5_ref
-
+      uint32  :affix1_ref
+      uint32  :affix2_ref
+      uint32  :affix3_ref
+      uint32  :affix4_ref
+      uint32  :affix5_ref
       ffs
-
-      uint32   :affix1_level
-      uint32   :affix2_level
-      uint32   :affix3_level
-      uint32   :affix4_level
-      uint32   :affix5_level
+      uint32  :affix1_level
+      uint32  :affix2_level
+      uint32  :affix3_level
+      uint32  :affix4_level
+      uint32  :affix5_level
 
       zeroes
     end
