@@ -116,15 +116,12 @@ module D3MPQ::CoreData::GameBalance
       uint32  :affix4_level
       uint32  :affix5_level
 
-      zeroes
+      zeroes  :length => 7
 
       uint32  :gem_type
       uint32  :crafting_mat_tier
       uint32  :crafting_mat_rarity
-      zeroes  :length => 3
-      uint32  :ui_others_0
-      uint32  :ui_others_1
-      uint32  :ui_others_2
+
       zeroes  :length => 1
     end
   end
