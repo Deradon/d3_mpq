@@ -5,9 +5,9 @@ describe D3MPQ::CoreData::GameBalance::Items, :integration => true do
 
   items = [
     "Items_Armor.gam",
-    "Items_Legendary.gam",
-    "Items_Legendary_Other.gam",
-    "Items_Legendary_Weapons.gam",
+#    "Items_Legendary.gam",
+#    "Items_Legendary_Other.gam",
+#    "Items_Legendary_Weapons.gam",
     "Items_Other.gam",
     "Items_Quests_Beta.gam",
     "Items_Weapons.gam"

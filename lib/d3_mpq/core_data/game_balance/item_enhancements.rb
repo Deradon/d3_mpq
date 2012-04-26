@@ -9,14 +9,14 @@ module D3MPQ::CoreData::GameBalance
               :read_length  => 0x100,
               :trim_padding => true
 
-      zeroes
+#      zeroes
 
       # lot of ints
-      103.times do |i|
+      109.times do |i|
         uint32  "ui#{i}".intern
       end
 
-      zeroes  :length => 5
+#      zeroes  :length => 1
     end
   end
 end

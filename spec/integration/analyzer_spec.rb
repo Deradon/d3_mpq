@@ -5,9 +5,9 @@ describe D3MPQ::Analyzer, :integration => true do
 
   items = [
     "Items_Armor.gam",
-    "Items_Legendary.gam",
-    "Items_Legendary_Other.gam",
-    "Items_Legendary_Weapons.gam",
+#    "Items_Legendary.gam",
+#    "Items_Legendary_Other.gam",
+#    "Items_Legendary_Weapons.gam",
     "Items_Other.gam",
     "Items_Quests_Beta.gam",
     "Items_Weapons.gam"
@@ -18,8 +18,8 @@ describe D3MPQ::Analyzer, :integration => true do
     D3MPQ::CoreData::GameBalance::AffixList         => "#{game_balance}AffixList.gam",
     D3MPQ::CoreData::GameBalance::ItemTypes         => "#{game_balance}ItemTypes.gam",
     D3MPQ::CoreData::GameBalance::ExperienceTable   => "#{game_balance}ExperienceTable.gam",
-    D3MPQ::CoreData::GameBalance::EliteModifiers    => "#{game_balance}EliteModifiers.gam",
-    D3MPQ::CoreData::GameBalance::ItemDropTable     => "#{game_balance}ItemDropTable.gam",
+#    D3MPQ::CoreData::GameBalance::EliteModifiers    => "#{game_balance}EliteModifiers.gam",
+#    D3MPQ::CoreData::GameBalance::ItemDropTable     => "#{game_balance}ItemDropTable.gam",
     D3MPQ::CoreData::GameBalance::ItemEnhancements  => "#{game_balance}ItemEnhancements.gam",
     D3MPQ::CoreData::GameBalance::Items             => items,
     D3MPQ::CoreData::GameBalance::LabelsGlobal      => "#{game_balance}LabelsGlobal.gam",

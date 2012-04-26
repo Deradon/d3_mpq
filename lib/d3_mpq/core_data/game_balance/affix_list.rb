@@ -1,6 +1,6 @@
 module D3MPQ::CoreData::GameBalance
-  class AffixList < Base#BinData::Record
-    self.struct_size = 0x218
+  class AffixList < Base
+    self.struct_size = 0x290
 
     content do
       zeroes
@@ -9,41 +9,37 @@ module D3MPQ::CoreData::GameBalance
               :read_length  => 0x100,
               :trim_padding => true
 
-      uint32  :gold_value
-      uint32  :min_level
-      uint32  :seven_oh
-      uint32  :int1
-      uint32  :min_level_plus_x
+      uint32  :u00
+      uint32  :u01
 
-      zeroes
-
-      uint32    :int2
-      uint32    :int3
-      uint32be  :ref1
-      uint32be  :ref2
-      uint32be  :ref3
-      uint32be  :ref4
-      uint32be  :ref5
+      uint32  :alvl
+      uint32  :sup_mask
+      uint32  :u02
+      uint32  :u03
+      uint32  :u04
+      uint32  :u05
+      uint32  :p01
+      uint32  :p02
+      uint32  :rare_name_prefix_id
+      uint32  :rare_name_suffix_id
+      uint32  :group_hash
+      uint32  :group_hash2
+      uint32  :ressource_or_class
+      uint32  :resource_type_hash
+      uint32  :u06
 
       ffs :length => 5
 
-      uint32be  :ref6
-      uint32be  :ref7
-      uint32be  :ref8
-      uint32be  :ref9
-      uint32be  :ref10
-      uint32be  :ref11
-      uint32be  :ref12
-      uint32be  :ref13
-      uint32be  :ref14
-
-      array :internal_refs, :initial_length => 0x04 do
-        uint32  :int1
-        uint32  :int2
-        zeroes  :length => 2
-        uint32  :internal_ref_offset
-        uint32  :internal_ref_length
+      32.times do |i|
+        uint32 "igh#{i}".intern
       end
+
+      uint32  :quality_mask
+      uint32  :socket_mask
+      uint32  :primary_group_hash
+
+      mod_codes :mod_codes, :initial_length => 4
+#      4.times { |i| mod_code "mod_code_#{i}" }
 
       zeroes  :length => 18
     end

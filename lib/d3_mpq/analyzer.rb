@@ -1,28 +1,44 @@
+require 'fileutils'
+
 module D3MPQ
   class Analyzer
     attr_reader :attributes
-    require 'fileutils'
 
-    def initialize(parser, files, field = :content)
+    def initialize(parser, files, fields = :content)
       @parser     = parser.new
       @files      = [*files]
-      @field      = field
+      @field      = fields
+#      @fields     = [*fields]
     end
 
     # Just write analyzed data to disc. (within /analyze)
     def write
-      parser_name = @parser.class.name.gsub("::", "_").downcase
-      dir = File.join("analyze", parser_name)
-
-      # HACK: if given StringListParser, write Output to differend directory
-      if parser_name == "d3mpq_stringlist"
-        dir = File.join("analyze", "StringList")
-        write_single_file(dir, @files.first.split("/").last)
-    else
-        write_single_file("analyze")
-        dir = File.join(dir, @field.to_s) if @field
-        write_analyzed(dir)
+      case parser_name
+      when "d3mpq_stringlist"
+        write_stringlist
+      else
+        write_game_balance
       end
+    end
+
+    # Writing if StringList
+    def write_stringlist
+      dir = File.join("analyze", "StringList")
+      write_single_file(dir, @files.first.split("/").last)
+    end
+
+    # Writing if GameBalance
+    def write_game_balance
+      write_single_file("analyze")
+
+      dir = File.join("analyze", parser_name)
+      dir = File.join(dir, @field.to_s) if @field
+      write_analyzed(dir)
+    end
+
+    # Example: d3mpq_stringlist
+    def parser_name
+      @parser_name ||= @parser.class.name.gsub("::", "_").downcase
     end
 
     # Write output to a single file. (dir/filename)
@@ -43,7 +59,6 @@ module D3MPQ
         else
           snapshot.each { |e| s << [*e].join("|") }
         end
-
       end
 
       filename ||= @parser.class.name.split("::").last
@@ -53,7 +68,8 @@ module D3MPQ
 
     # Writing multiple files to given dir.
     def write_analyzed(dir)
-      FileUtils.mkdir_p File.join(dir)
+      FileUtils.mkdir_p(dir)
+
       attributes.each do |a, v|
         path = File.join(dir, a.to_s)
         s = "Count|Value\n" + v.map { |e| "#{e[:count]}|#{e[:value]}" }.join("\n")
@@ -84,6 +100,8 @@ module D3MPQ
 
       return @attributes
     end
+
+
 
     private
 

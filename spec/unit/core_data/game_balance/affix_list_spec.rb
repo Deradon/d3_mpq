@@ -8,8 +8,7 @@ describe D3MPQ::CoreData::GameBalance::AffixList do
 #    BinData::trace_reading { subject.read(io) }
   end
 
-  specify do
-    pending
-  end
+  its(:variable_content) { subject.size.should_not == 0 }
+  its(:rest) { should == "" }
 end
 

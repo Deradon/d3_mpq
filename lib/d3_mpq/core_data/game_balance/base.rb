@@ -39,6 +39,13 @@ module D3MPQ::CoreData::GameBalance
               :adjust_offset  => lambda { data_offset + 16 },
               &block
 
+
+        count_bytes_remaining :bytes_remaining
+        hide  :variable_content
+        array :variable_content, :initial_length => lambda { bytes_remaining / 4 } do
+          string :length => 4
+        end
+
         hide  :rest
         rest  :rest
       end

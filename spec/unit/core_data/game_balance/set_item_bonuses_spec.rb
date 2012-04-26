@@ -8,7 +8,7 @@ describe D3MPQ::CoreData::GameBalance::SetItemBonuses do
 #    BinData::trace_reading { subject.read(io) }
   end
 
-  # TODO
-  its(:rest) { should_not == "" }
+  its(:variable_content) { subject.size.should_not == 0 }
+  its(:rest) { should == "" }
 end
 
