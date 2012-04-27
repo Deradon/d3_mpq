@@ -4,6 +4,7 @@ require 'bindata_ext/mod_code'
 require 'bindata_ext/mod_codes'
 
 require 'd3_mpq/analyzer'
+require 'd3_mpq/attributes'
 require 'd3_mpq/mod_code_analyzer'
 
 require 'd3_mpq/core_data'

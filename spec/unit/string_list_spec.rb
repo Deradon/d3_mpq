@@ -10,6 +10,5 @@ describe D3MPQ::StringList do
 
   its(:content) { should be_a_kind_of(BinData::Array) }
   its(:rest) { should == "" }
-  specify { subject.content.count.should == 18 }
 end
 

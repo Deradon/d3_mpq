@@ -16,6 +16,8 @@ module D3MPQ
       case parser_name
       when "d3mpq_stringlist"
         write_stringlist
+      when "d3mpq_attributes"
+        write_single_file("analyze")
       else
         write_game_balance
       end

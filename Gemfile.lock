@@ -3,6 +3,7 @@ PATH
   specs:
     d3_mpq (0.0.1)
       bindata
+      nokogiri
 
 GEM
   remote: http://rubygems.org/
@@ -16,6 +17,7 @@ GEM
     guard-rspec (0.7.0)
       guard (>= 0.10.0)
     libnotify (0.7.2)
+    nokogiri (1.5.2)
     rspec (2.9.0)
       rspec-core (~> 2.9.0)
       rspec-expectations (~> 2.9.0)
