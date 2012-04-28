@@ -8,6 +8,11 @@ class ModCode < BinData::Record
   uint32  :mod_offset
   uint32  :mod_length
 
+  # Returns: nil if mod_code is 0xFFFFFFFF, mod_code otherwise
+  def id
+    self.mod_code == 0xFFFFFFFF ? nil : self.mod_code
+  end
+
   # HACK: to get access to file_size && co
   def base
     parent.parent.parent
@@ -27,7 +32,5 @@ class ModCode < BinData::Record
   def data
     base.variable_content[index, count]
   end
-
-  # unpack 'f'
 end
 

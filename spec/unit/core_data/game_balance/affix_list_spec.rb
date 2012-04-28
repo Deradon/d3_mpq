@@ -10,5 +10,11 @@ describe D3MPQ::CoreData::GameBalance::AffixList do
 
   its(:variable_content) { subject.size.should_not == 0 }
   its(:rest) { should == "" }
+
+  describe "content#mod_codes" do
+    let(:mod_codes) { subject.content.first.mod_codes }
+
+    specify { mod_codes.should be_kind_of(ModCodes) }
+  end
 end
 
