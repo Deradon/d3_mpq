@@ -17,6 +17,7 @@ describe ModCode do
     context "when mod_code is not 0xFFFFFFFF" do
       before(:all) { subject.mod_code = 0x42 }
       specify { subject.id.should == subject.mod_code }
+      specify { subject.id.should be_kind_of(Integer) }
     end
   end
 end

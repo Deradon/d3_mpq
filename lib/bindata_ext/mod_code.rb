@@ -10,7 +10,7 @@ class ModCode < BinData::Record
 
   # Returns: nil if mod_code is 0xFFFFFFFF, mod_code otherwise
   def id
-    self.mod_code == 0xFFFFFFFF ? nil : self.mod_code
+    self.mod_code == 0xFFFFFFFF ? nil : self.mod_code.to_i
   end
 
   # HACK: to get access to file_size && co
