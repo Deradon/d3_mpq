@@ -1,7 +1,9 @@
 # README: http://www.d3inferno.com/Items.gam.html
+
+# Support for old / removed Legendary Items from MPQ
 module D3MPQ::CoreData::GameBalance
-  class Items < Base
-    self.struct_size = 0x5F0
+  class LegacyItems < Base
+    self.struct_size = 0x590
 
     content do
       zeroes
@@ -23,6 +25,7 @@ module D3MPQ::CoreData::GameBalance
       bit1    :is_uniq
       bit24   :check_value => 0x0
 
+
       zeroes
 
       uint32  :item_level
@@ -36,17 +39,22 @@ module D3MPQ::CoreData::GameBalance
       uint32  :ilvl2
       uint32  :required_level
 
-      uint32  :u00
-
       uint32  :durability_min
       uint32  :durability_delta
       uint32  :base_item_hash
-      uint32  :set_item_bonusses
-      uint32  :salvage_common
-      uint32  :salvage_magic
-      uint32  :salvage_rare
-      uint32  :rare_group_prefix_id
-      uint32  :rare_group_suffix_id
+
+
+      ### Do not rely on the data below ###
+        uint32  :set_item_bonusses
+        uint32  :salvage_common
+        uint32  :salvage_magic
+        uint32  :salvage_rage
+
+        uint32  :rare_group_prefix_id
+        # uint32  :rare_group_suffix_id
+      #####################################
+
+
       zeroes
 
       uint32  :u09 #town scroll etc.
@@ -65,14 +73,11 @@ module D3MPQ::CoreData::GameBalance
 
       # Speed
       float   :attacks_per_second
-      zeroes  :length => 21
-      float   :min_damage_mod
-      float   :max_damage_mod
-      zeroes  :length => 26
+      zeroes  :length => 0x28
 
       # Unknown
-      uint32  :u10    # Weapons:        30601 = wand; 30599 = bow/crossbow; 30592 = rest
-                      # non-weapongs:   0xFF
+      uint32    :u10    # Weapons:        30601 = wand; 30599 = bow/crossbow; 30592 = rest
+                        # non-weapongs:   0xFF
 
       # Padding
       zeroes
@@ -84,17 +89,13 @@ module D3MPQ::CoreData::GameBalance
       zeroes  :length => 12
 
       mod_codes :mod_codes, :initial_length => 16
-#      16.times { |i| mod_code "mod_code_#{i}" }
+      uint32    :item_quality
 
       # TODO
-      uint32  :item_quality
+      uint32  :u11
+      uint32  :u12   # none 0 x FF FF FF FF if Recipe
 
-      7.times do |i|
-        uint32  "teaches#{i}".intern
-      end
-
-      ffs     :length => 3
-      uint32  :enchants
+      ffs     :length => 6
 
       # Legendary Affixes
       uint32  :affix1_id
@@ -109,13 +110,7 @@ module D3MPQ::CoreData::GameBalance
       uint32  :affix4_level
       uint32  :affix5_level
 
-      zeroes  :length => 7
-
-      uint32  :gem_type
-      uint32  :crafting_mat_tier
-      uint32  :crafting_mat_rarity
-
-      zeroes  :length => 1
+      zeroes
     end
   end
 end

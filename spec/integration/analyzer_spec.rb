@@ -2,16 +2,20 @@ require 'spec_helper'
 
 describe D3MPQ::Analyzer, :integration => true do
   game_balance = "spec/fixtures/CoreData/GameBalance/"
+  legacy_path = "spec/fixtures/Legacy/"
 
   items = [
     "Items_Armor.gam",
-#    "Items_Legendary.gam",
-#    "Items_Legendary_Other.gam",
-#    "Items_Legendary_Weapons.gam",
     "Items_Other.gam",
     "Items_Quests_Beta.gam",
     "Items_Weapons.gam"
   ].map!{ |item| "#{game_balance}#{item}" }
+
+  legacy_items = [
+    "Items_Legendary.gam",
+    "Items_Legendary_Other.gam",
+    "Items_Legendary_Weapons.gam",
+  ].map!{ |item| "#{legacy_path}#{item}" }
 
   # Parse content only
   {
@@ -22,6 +26,7 @@ describe D3MPQ::Analyzer, :integration => true do
 #    D3MPQ::CoreData::GameBalance::ItemDropTable     => "#{game_balance}ItemDropTable.gam",
     D3MPQ::CoreData::GameBalance::ItemEnhancements  => "#{game_balance}ItemEnhancements.gam",
     D3MPQ::CoreData::GameBalance::Items             => items,
+    D3MPQ::CoreData::GameBalance::LegacyItems       => legacy_items,
     D3MPQ::CoreData::GameBalance::LabelsGlobal      => "#{game_balance}LabelsGlobal.gam",
     D3MPQ::CoreData::GameBalance::MonsterAffixes    => "#{game_balance}MonsterAffixes.gam",
     D3MPQ::CoreData::GameBalance::MonsterNames      => "#{game_balance}MonsterNames.gam",
