@@ -2,9 +2,11 @@ class ModCode < BinData::Record
   endian  :little
 
   uint32  :mod_code
+
   uint32  :mod_param1
   uint32  :mod_param2
   uint32  :mod_param3
+
   uint32  :mod_offset
   uint32  :mod_length
 
@@ -43,6 +45,10 @@ class ModCode < BinData::Record
     stack.max || 0.0
   end
 
+  def trace
+    stack.trace.map { |e| {:a  => e.a.to_s, :b => e.b.to_s, :formula => e.formula} }
+  end
+
   def stack
     @stack ||= Stack.new(data)
   end
@@ -56,7 +62,7 @@ class ModCode < BinData::Record
   #      Chained Attribute with more OP-Codes will fail
   #      NOTE: x / rand(a,b) works too
   class Stack
-    attr_reader :value
+    attr_reader :value, :trace
 
     def initialize(data)
       @stack  = []
@@ -204,6 +210,10 @@ class ModCode < BinData::Record
 
       def /(oth)
         StackValue.new(value/oth.value, min/oth.min, max/oth.max)
+      end
+
+      def to_s
+        (@min == @max) ? "#{@min}" : "#{@min}..#{@max}"
       end
     end
   end

@@ -13,7 +13,10 @@ describe ModCode do
 
       describe "#{affix.name}##{index}" do
         specify { mod_code.min <= mod_code.max }
-        pending "#{mod_code.stack.inspect}"
+        specify { mod_code.trace.should be_a_kind_of(Array) }
+
+        #pending "#{mod_code.stack.inspect}"
+        pending "#{mod_code.trace.inspect}"
       end
     end
   end
