@@ -7,7 +7,7 @@ describe ModCode do
   parser = D3MPQ::CoreData::GameBalance::AffixList.new
   parser.read(io)
 
-  parser.content[0,4].each do |affix|
+  parser.content[0,2].each do |affix|
     affix.mod_codes.each_with_index do |mod_code, index|
       next if mod_code.empty?
 

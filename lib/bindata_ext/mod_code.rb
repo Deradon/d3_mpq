@@ -145,8 +145,8 @@ class ModCode < BinData::Record
 
     # Perform OP-Code
     def op(&blk)
-      a = pop
       b = pop
+      a = pop
 
       a = StackValue.new(a) unless a.is_a?(StackValue)
       b = StackValue.new(b) unless b.is_a?(StackValue)
