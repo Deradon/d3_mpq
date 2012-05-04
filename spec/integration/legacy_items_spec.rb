@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe D3MPQ::CoreData::GameBalance::Items, :integration => true do
+describe D3MPQ::CoreData::GameBalance::LegacyItems, :integration => true do
   let(:base_path) { "spec/fixtures/Legacy/" }
 
   [

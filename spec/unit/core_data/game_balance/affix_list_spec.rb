@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe D3MPQ::CoreData::GameBalance::AffixList do
   let(:io) { File.open("spec/fixtures/CoreData/GameBalance/AffixList.gam") }
+  let(:mod_codes) { subject.content.first.mod_codes }
 
   before(:all) do
     subject.read(io)
@@ -12,8 +13,6 @@ describe D3MPQ::CoreData::GameBalance::AffixList do
   its(:rest) { should == "" }
 
   describe "content#mod_codes" do
-    let(:mod_codes) { subject.content.first.mod_codes }
-
     specify { mod_codes.should be_kind_of(ModCodes) }
   end
 end

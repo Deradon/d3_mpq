@@ -4,6 +4,8 @@ module D3MPQ
   class Analyzer
     attr_reader :attributes
 
+    SEPERATOR = "|"
+
     def initialize(parser, files, fields = :content)
       @parser     = parser.new
       @files      = [*files]
@@ -57,9 +59,9 @@ module D3MPQ
       snapshots.each do |snapshot|
         # HACKY: NEED TO FIX
         if @field
-          snapshot[@field].each { |e| s << e.values.join("|") }
+          snapshot[@field].each { |e| s << e.values.join(SEPERATOR) }
         else
-          snapshot.each { |e| s << [*e].join("|") }
+          snapshot.each { |e| s << [*e].join(SEPERATOR) }
         end
       end
 
