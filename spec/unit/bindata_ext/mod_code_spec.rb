@@ -3,11 +3,11 @@ require 'spec_helper'
 describe ModCode do
   io = File.open("spec/fixtures/CoreData/GameBalance/AffixList.gam")
 
-  # We use Affixes as example ModCodes
+  # TODO: We use Affixes as example ModCodes, change this
   parser = D3MPQ::CoreData::GameBalance::AffixList.new
   parser.read(io)
 
-  parser.content[0,100].each do |affix|
+  parser.content[0,4].each do |affix|
     affix.mod_codes.each_with_index do |mod_code, index|
       next if mod_code.empty?
 

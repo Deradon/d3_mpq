@@ -6,7 +6,7 @@ describe D3MPQ::StringList, :integration => true do
 
   dir = Dir.open("spec/fixtures/StringList/")
   dir.entries.each do |f|
-    next if f == "." || f == ".." ||
+    next if f == "." || f == ".."
 
     file = File.join(dir, f)
 

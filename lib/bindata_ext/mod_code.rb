@@ -19,17 +19,14 @@ class ModCode < BinData::Record
     parent.parent.parent.parent
   end
 
-  # Index within variable data
   def index
     (mod_offset - base.data_num_bytes - base.data_offset) / 4
   end
 
-  # n item from variable_content
   def count
     mod_length / 4
   end
 
-  # Variable content
   def data
     base.variable_content[index, count]
   end
@@ -38,12 +35,10 @@ class ModCode < BinData::Record
     mod_length == 0
   end
 
-  # NEW
   def min
     stack.min || 0.0
   end
 
-  # NEW
   def max
     stack.max || 0.0
   end
@@ -182,7 +177,7 @@ class ModCode < BinData::Record
     class Trace < Struct.new(:a, :b, :formula, :x)
     end
 
-    # NEW
+    # Wrapper for a Float that handles: current_value, min_value, max_value
     class StackValue
       attr_accessor :value, :min, :max
 
