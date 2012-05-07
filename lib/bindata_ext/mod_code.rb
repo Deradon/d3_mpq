@@ -116,6 +116,7 @@ class ModCode < BinData::Record
         case op
         when 0x00
           # return the value at the top of the stack
+          raise "Return found, but Stack not empty!" if @data[index+1]
           return @value = pop
         when 0x01
           # call the function of the next op-code (just pass here)

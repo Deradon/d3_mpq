@@ -16,7 +16,7 @@ describe ModCode do
         specify { mod_code.trace.should be_a_kind_of(Array) }
 
         #pending "#{mod_code.stack.inspect}"
-        pending "#{mod_code.trace.inspect}"
+#        pending "#{mod_code.trace.inspect}"
       end
     end
   end
