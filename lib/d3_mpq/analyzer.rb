@@ -61,7 +61,15 @@ module D3MPQ
       snapshots.each do |snapshot|
         # HACKY: NEED TO FIX
         if @field
-          snapshot[@field].each { |e| s << e.values.map { |v| "\"#{v}\"" }.join(SEPERATOR) }
+          snapshot[@field].each_with_index do |e, i|
+            s << e.values.map do |v|
+              if v.is_a?(String)
+                "\"#{v}\""
+              else
+                "#{v}"
+              end
+            end.join(SEPERATOR)
+          end
         else
           s << [*snapshot.values].map { |e|
             e.is_a?(String) ? "\"#{e}\""  : "#{e}"

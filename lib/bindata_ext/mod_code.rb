@@ -46,7 +46,8 @@ class ModCode < BinData::Record
   end
 
   def trace
-    stack.trace.map { |e| {:a  => e.a.to_s, :b => e.b.to_s, :formula => e.formula} }
+    stack.trace
+    #stack.trace.map { |e| {:a  => e.a.to_s, :b => e.b.to_s, :formula => e.formula} }
   end
 
   def stack
@@ -117,31 +118,41 @@ class ModCode < BinData::Record
         when 0x00
           # return the value at the top of the stack
           raise "Return found, but Stack not empty!" if @data[index+1]
+          @trace << "RETURN"
           return @value = pop
         when 0x01
           # call the function of the next op-code (just pass here)
+          @trace << "call"
         when 0x03
           # rand1(A,B); pop 2 numbers and push a random value between A and A+B
-          op { |a,b| ["rand(A,A+B)", a, a + b] }
+          #op { |a,b| ["rand(A,A+B)", a, a + b] }
+          op { |a,b| ["rand", a, a + b] }
         when 0x04
           # rand2(A,B); pop 2 numbers and push a random value between A and B
-          op { |a,b| ["rand(A,B)", a, b] }
+          #op { |a,b| ["rand(A,B)", a, b] }
+          op { |a,b| ["rand2", a, b] }
         when 0x06
           # push the next DWord onto the stack
-          push StackValue.new(@data[index+1].unpack('F').first)
+          v = @data[index+1].unpack('F').first
+          push StackValue.new(v)
+          @trace << "#{v}"
           skip = true
         when 0x0B
           # add(A,B); pop 2 numbers and push the sum
-          op { |a,b| ["add(A,B)", (a + b)] }
+          #op { |a,b| ["add(A,B)", (a + b)] }
+          op { |a,b| ["add", (a + b)] }
         when 0x0C
           # sub(A,B); pop 2 numbers and push the difference
-          op { |a,b| ["sub(A,B)", (a - b)] }
+          #op { |a,b| ["sub(A,B)", (a - b)] }
+          op { |a,b| ["sub", (a - b)] }
         when 0x0D
           # mul(A,B); pop 2 numbers and push the product
-          op { |a,b| ["mul(A,B)", (a * b)] }
+          #op { |a,b| ["mul(A,B)", (a * b)] }
+          op { |a,b| ["mul", (a * b)] }
         when 0x0E
           # div(A,B); pop 2 numbers and push the quotient
-          op { |a,b| ["div(A,B)", (a / b)] }
+          #op { |a,b| ["div(A,B)", (a / b)] }
+          op { |a,b| ["div", (a / b)] }
         else
           raise "OP-Code not found: #{op} | #{@data.inspect}"
         end
@@ -166,7 +177,8 @@ class ModCode < BinData::Record
       r.value = (r.max == r.min) ? r.min : rand_range(r.min, r.max)
 
       push(r)
-      @trace << Trace.new(a, b, formula, r)
+      #@trace << Trace.new(a, b, formula, r)
+      @trace << formula
     end
 
     def inspect

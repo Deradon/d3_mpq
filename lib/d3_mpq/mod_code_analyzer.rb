@@ -12,7 +12,7 @@ module D3MPQ
 #      puts attributes
       s = ["ModCode"]
       attributes.each do |e|
-        s << "#{e[:mod_code]}|" + e[:names].join(SEPERATOR)
+        s << "#{e[:mod_code]}#{SEPERATOR}" + e[:names].join(SEPERATOR)
       end
 
       path = File.join("analyze", @output)
