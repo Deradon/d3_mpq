@@ -20,6 +20,8 @@ module D3MPQ
         write_stringlist
       when "d3mpq_attributes"
         write_single_file("analyze")
+      when "d3mpq_coredata_actor"
+        write_single_file("analyze")
       else
         write_game_balance
       end
@@ -61,7 +63,9 @@ module D3MPQ
         if @field
           snapshot[@field].each { |e| s << e.values.map { |v| "\"#{v}\"" }.join(SEPERATOR) }
         else
-          snapshot.each { |e| s << [*e].join(SEPERATOR) }
+          s << [*snapshot.values].map { |e|
+            e.is_a?(String) ? "\"#{e}\""  : "#{e}"
+          } .join(SEPERATOR)
         end
       end
 
@@ -116,8 +120,13 @@ module D3MPQ
       @snapshots = []
       @files.each do |f|
         io = File.open(f)
-        @parser.read(io)
-        @snapshots << @parser.snapshot
+
+        begin
+          @parser.read(io)
+          @snapshots << @parser.snapshot
+        rescue EOFError => e
+          puts "#{e.inspect}\n#{f}"
+        end
       end
 
       return @snapshots
