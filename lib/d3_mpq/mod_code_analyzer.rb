@@ -1,5 +1,7 @@
 module D3MPQ
   class ModCodeAnalyzer
+    SEPERATOR = ","
+
     def initialize(parser, files, output = nil)
       @parser     = parser.new
       @files      = [*files]
@@ -10,7 +12,7 @@ module D3MPQ
 #      puts attributes
       s = ["ModCode"]
       attributes.each do |e|
-        s << "#{e[:mod_code]}|" + e[:names].join("|")
+        s << "#{e[:mod_code]}|" + e[:names].join(SEPERATOR)
       end
 
       path = File.join("analyze", @output)
