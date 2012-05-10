@@ -75,6 +75,21 @@ module D3MPQ::CoreData::GameBalance
     def fix_struct_size
       self.class.fix_struct_size
     end
+
+#    def to_csv
+#      raise "TODO"
+#    end
+
+#    def csv_keys
+#      # TODO
+#    end
+
+#    def csv_values
+#      # TODO
+#      {
+#        :mod_code1_params1 => lambda { mod_codes[0] }
+#      }
+#    end
   end
 end
 

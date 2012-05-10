@@ -47,7 +47,6 @@ class ModCode < BinData::Record
 
   def trace
     stack.trace
-    #stack.trace.map { |e| {:a  => e.a.to_s, :b => e.b.to_s, :formula => e.formula} }
   end
 
   def stack
@@ -57,16 +56,12 @@ class ModCode < BinData::Record
   private
 
   # Pseudo-Stack to compute min/max of current ModCode
-  #
-  # FIX: min / max
-  #      It currently only works for a simple Attribute like: rand(a,b)
-  #      Chained Attribute with more OP-Codes will fail
-  #      NOTE: x / rand(a,b) works too
   class Stack
     attr_reader :value, :trace
 
     def initialize(data)
       @stack  = []
+      @trace  = []
       @data   = *data
       @value  = nil
       parse
@@ -104,17 +99,11 @@ class ModCode < BinData::Record
     def parse
       return @value if @value
 
-      @trace = []
-      skip = false
+      next_op = true
+      @data.each_with_index do |dword, index|
+        next_op = true and next unless next_op
 
-      @data.each_with_index do |e, index|
-        if skip
-          skip = false
-          next
-        end
-
-        op = e.bytes.first
-        case op
+        case dword.bytes.first
         when 0x00
           # return the value at the top of the stack
           raise "Return found, but Stack not empty!" if @data[index+1]
@@ -123,34 +112,28 @@ class ModCode < BinData::Record
           # call the function of the next op-code (just pass here)
         when 0x03
           # rand1(A,B); pop 2 numbers and push a random value between A and A+B
-          #op { |a,b| ["rand(A,A+B)", a, a + b] }
-          op { |a,b| ["rand", a, a + b] }
+          op { |a, b| ["rand", a, a + b] }
         when 0x04
           # rand2(A,B); pop 2 numbers and push a random value between A and B
-          #op { |a,b| ["rand(A,B)", a, b] }
-          op { |a,b| ["rand2", a, b] }
+          op { |a, b| ["rand2", a, b] }
         when 0x06
           # push the next DWord onto the stack
           v = @data[index+1].unpack('F').first
-          push StackValue.new(v)
+          push(StackValue.new(v))
           @trace << "#{v}"
-          skip = true
+          next_op = false
         when 0x0B
           # add(A,B); pop 2 numbers and push the sum
-          #op { |a,b| ["add(A,B)", (a + b)] }
-          op { |a,b| ["add", (a + b)] }
+          op { |a, b| ["add", (a + b)] }
         when 0x0C
           # sub(A,B); pop 2 numbers and push the difference
-          #op { |a,b| ["sub(A,B)", (a - b)] }
-          op { |a,b| ["sub", (a - b)] }
+          op { |a, b| ["sub", (a - b)] }
         when 0x0D
           # mul(A,B); pop 2 numbers and push the product
-          #op { |a,b| ["mul(A,B)", (a * b)] }
-          op { |a,b| ["mul", (a * b)] }
+          op { |a, b| ["mul", (a * b)] }
         when 0x0E
           # div(A,B); pop 2 numbers and push the quotient
-          #op { |a,b| ["div(A,B)", (a / b)] }
-          op { |a,b| ["div", (a / b)] }
+          op { |a, b| ["div", (a / b)] }
         else
           raise "OP-Code not found: #{op} | #{@data.inspect}"
         end
@@ -164,67 +147,49 @@ class ModCode < BinData::Record
       b = pop
       a = pop
 
-      a = StackValue.new(a) unless a.is_a?(StackValue)
-      b = StackValue.new(b) unless b.is_a?(StackValue)
-
       formula, min, max = blk.call(a, b)
-      r = (max ||= min).dup
 
-      r.min = [min.min, max.min].min
-      r.max = [min.max, max.max].max
-      r.value = (r.max == r.min) ? r.min : rand_range(r.min, r.max)
-
-      push(r)
-      #@trace << Trace.new(a, b, formula, r)
+      push(StackValue.random(min, min || max))
       @trace << formula
     end
 
     def inspect
-      {
-        :value => @value,
-        :trace => @trace
-      }
-    end
-
-    # helper to rand in range of two floats
-    def rand_range(min, max)
-      rand * (max - min) + min
-    end
-
-    class Trace < Struct.new(:a, :b, :formula, :x)
+      { :value => @value, :trace => @trace}
     end
 
     # Wrapper for a Float that handles: current_value, min_value, max_value
     class StackValue
-      attr_accessor :value, :min, :max
+      attr_accessor :value, :min_max
+
+      def self.random(min, max)
+        StackValue.new(MinMax.new(min.min, max.max).random, min.min, max.max)
+      end
 
       def initialize(value, min = nil, max = nil)
-        @value = value
-        @min   = min || value
-        @max   = max || value
-
-        # HACK: to be sure
-        @min, @max = @max, @min if @min > @max
+        @value   = value
+        min    ||= @value
+        @min_max = MinMax.new(min, max)
       end
 
-      def -(oth)
-        StackValue.new(value - oth.value, min - oth.min, max - oth.max)
-      end
 
-      def +(oth)
-        StackValue.new(value + oth.value, min + oth.min, max + oth.max)
-      end
-
-      def *(oth)
-        StackValue.new(value * oth.value, min * oth.min, max * oth.max)
-      end
-
-      def /(oth)
-        StackValue.new(value/oth.value, min/oth.min, max/oth.max)
+      [:min, :max].each { |m| define_method(m) { min_max.send(m) } }
+      ["-", "+", "*", "/"].each do |m|
+        define_method(m) { |sv| with_other(sv){ |a, b| a.send(m, b) } }
       end
 
       def to_s
-        (@min == @max) ? "#{@min}" : "#{@min}..#{@max}"
+        (min == max) ? "#{min}" : "#{min}..#{max}"
+      end
+
+      def random
+        StackValue.new( (rand * (max - min) + min), min, max)
+      end
+
+      private
+      def with_other(oth, &block)
+        mm = block.call(min_max, oth.min_max)
+        v  = block.call(value, oth.value)
+        StackValue.new(v, mm.min, mm.max)
       end
     end
   end
