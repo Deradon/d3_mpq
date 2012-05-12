@@ -1,4 +1,4 @@
 module D3MPQ
-  VERSION = "0.0.5"
+  VERSION = "0.0.6"
 end
 
