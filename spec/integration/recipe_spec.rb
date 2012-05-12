@@ -1,11 +1,11 @@
 require 'spec_helper'
 
 # Run IntegrationTest against MPQ
-describe D3MPQ::StringList, :integration => true do
-  parser = D3MPQ::StringList
+describe D3MPQ::Recipe, :integration => true do
+  parser = D3MPQ::Recipe
 
-  specify "Analyzer for D3MPQ::StringList" do
-    dir = Dir.open("spec/fixtures/StringList/")
+  specify "Analyzer for D3MPQ::Recipe" do
+    dir = Dir.open("spec/fixtures/Recipe/")
     exceptions = []
 
     dir.entries.each do |f|
@@ -21,18 +21,16 @@ describe D3MPQ::StringList, :integration => true do
         next
       end
 
-      analyzer = D3MPQ::Analyzer.new(parser, file, nil)
+      analyzer = D3MPQ::Analyzer.new(parser, file)
 
       begin
-        expect { analyzer.write }.to_not raise_error
+        analyzer.write
       rescue Exception => e
         warn "[FAILED] #{f}\n#{e.inspect}"
         exceptions << e
       end
     end
-
     raise "#{exceptions.count} errors" unless exceptions.empty?
-
   end
 end
 

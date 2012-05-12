@@ -6,48 +6,27 @@ describe D3MPQ::CoreData::Actor, :integration => true do
 
   actor_path = "spec/fixtures/CoreData/Actor/"
 
-
-
   dir = Dir.open(actor_path)
   actors = dir.entries
   actors = actors.delete_if{ |e| e == "." || e == ".."}
   actors = actors.map{ |a| "#{actor_path}#{a}" }
 
+  specify "Analyzer for D3MPQ::CoreData::Actor" do
+    actors.delete_if do |a|
+      temp_file = File.new(a)
+      size = temp_file.size
+      temp_file.close
 
-#  dir.entries.sort.each do |f|
-#    next if f == "." || f == ".."
-
-  actors.delete_if do |a|
-    temp_file = File.new(a)
-    size = temp_file.size
-    temp_file.close
-
-    if size == 0
-      warn "[SKIP] #{a}"
-      true
-    else
-      false
+      if size == 0
+        warn "[SKIP] #{a}"
+        true
+      else
+        false
+      end
     end
+
+    parser = D3MPQ::Analyzer.new(parser, actors, nil)
+    parser.write
   end
-#    file = File.join(dir, f)
-
-#    temp_file = File.new(file)
-#    size = temp_file.size
-#    temp_file.close
-
-#    if size == 0
-#      warn "[EMPTY FILE]#{f}"
-#      next
-#    end
-
-    describe "Analyzer for #{parser.to_s}#" do
-      subject { D3MPQ::Analyzer.new(parser, actors, nil) }
-      specify { subject.write }
-
-#      specify do
-#        BinData::trace_reading { parser.read(File.open(file)) }
-#      end
-    end
-#  end
 end
 

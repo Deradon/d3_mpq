@@ -1,12 +1,11 @@
 require 'spec_helper'
 
-describe D3MPQ::CSVGenerator::Items do
+describe D3MPQ::CSVGenerator::Recipes do
   describe "#write" do
     [
-      "Items_Armor.gam",
-      "Items_Weapons.gam",
-      "Items_Other.gam",
-      "Items_Quests_Beta.gam"
+      "RecipesBlacksmith.gam",
+      "RecipesJeweler.gam",
+      "RecipesMystic.gam"
     ].each do |file_name|
       context "when called with: #{file_name}" do
         let(:input) { "spec/fixtures/CoreData/GameBalance/#{file_name}" }

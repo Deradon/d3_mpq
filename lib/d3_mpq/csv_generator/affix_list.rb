@@ -10,7 +10,7 @@ module D3MPQ::CSVGenerator
       :param1             => :param1,
       :param2             => :param2,
       :rare_prefix_fileid => :rare_name_prefix_id,
-      :rate_suffix_fileid => :rare_name_suffix_id,
+      :rare_suffix_fileid => :rare_name_suffix_id,
       :parent_hash        => :group_hash,
       :parent_hash2       => :group_hash2,
       :class_id           => :class_id,

@@ -13,11 +13,11 @@ describe D3MPQ::CSVGenerator do
     end
   end
 
-  describe "#write" do
-    let(:entries) { Dir.open(dir).entries[0,10].map { |e| "spec/fixtures/StringList/#{e}" } }
-    let(:generator) { D3MPQ::CSVGenerator::StringList.new(entries) }
+#  describe "#write" do
+#    let(:entries) { Dir.open(dir).entries[0,10].map { |e| "spec/fixtures/StringList/#{e}" } }
+#    let(:generator) { D3MPQ::CSVGenerator::StringList.new(entries) }
 
-    specify { generator.write }
-  end
+#    specify { generator.write }
+#  end
 end
 

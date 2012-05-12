@@ -14,6 +14,7 @@ module D3MPQ
 
   require 'd3_mpq/core_data'
   require 'd3_mpq/string_list'
+  require 'd3_mpq/recipe'
 
   require 'd3_mpq/version'
 

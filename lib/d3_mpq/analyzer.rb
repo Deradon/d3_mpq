@@ -18,6 +18,8 @@ module D3MPQ
       case parser_name
       when "d3mpq_stringlist"
         write_stringlist
+      when "d3mpq_recipe"
+        write_recipe
       when "d3mpq_attributes"
         write_single_file("analyze")
       when "d3mpq_coredata_actor"
@@ -30,6 +32,13 @@ module D3MPQ
     # Writing if StringList
     def write_stringlist
       dir = File.join("analyze", "StringList")
+      write_single_file(dir, @files.first.split("/").last)
+    end
+
+    # Writing if StringList
+    def write_recipe
+      @field = nil
+      dir = File.join("analyze", "Recipe")
       write_single_file(dir, @files.first.split("/").last)
     end
 
