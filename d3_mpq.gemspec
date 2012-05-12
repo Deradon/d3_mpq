@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.summary     = '"Diablo 3" data mining'
   s.description = "Parsing data out of Diablo 3."
 
-#  s.executables   = ["d3_mpq"]
+  s.executables   = ["d3_mpq"]
   s.files         = Dir["{bin,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files    = Dir["{spec}/**/*"]
   s.require_paths = ["lib"]

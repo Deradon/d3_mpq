@@ -1,11 +1,5 @@
 module D3MPQ::CoreData::GameBalance
-  class Base < BinData::Record
-    endian :little
-
-    # MPQ - Header
-    uint32  :check_value => 0xDEADBEEF  # MPQ file magic number
-    uint32  :version_id                 # file type or version id (same for all *.gam files)
-    zeroes  :length => 2
+  class Base < D3MPQ::MPQ
 
     # GAM - Header
     uint32  :file_id
@@ -35,7 +29,7 @@ module D3MPQ::CoreData::GameBalance
       # Main method to use
       def content(&block)
         array :content,
-              :initial_length => lambda { data_num_bytes / struct_size + fix_struct_size },
+              :initial_length => lambda { data_num_bytes / struct_size },
               :adjust_offset  => lambda { data_offset + 16 },
               &block
 
@@ -57,39 +51,12 @@ module D3MPQ::CoreData::GameBalance
       def struct_size=(value)
         @struct_size = value
       end
-
-      def fix_struct_size
-        @fix_struct_size ||= 0
-      end
-
-      def fix_struct_size=(value)
-        @fix_struct_size = value
-      end
     end
 
 
     def struct_size
       self.class.struct_size
     end
-
-    def fix_struct_size
-      self.class.fix_struct_size
-    end
-
-#    def to_csv
-#      raise "TODO"
-#    end
-
-#    def csv_keys
-#      # TODO
-#    end
-
-#    def csv_values
-#      # TODO
-#      {
-#        :mod_code1_params1 => lambda { mod_codes[0] }
-#      }
-#    end
   end
 end
 

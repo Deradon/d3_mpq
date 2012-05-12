@@ -171,7 +171,6 @@ class ModCode < BinData::Record
         @min_max = MinMax.new(min, max)
       end
 
-
       [:min, :max].each { |m| define_method(m) { min_max.send(m) } }
       ["-", "+", "*", "/"].each do |m|
         define_method(m) { |sv| with_other(sv){ |a, b| a.send(m, b) } }
@@ -179,10 +178,6 @@ class ModCode < BinData::Record
 
       def to_s
         (min == max) ? "#{min}" : "#{min}..#{max}"
-      end
-
-      def random
-        StackValue.new( (rand * (max - min) + min), min, max)
       end
 
       private

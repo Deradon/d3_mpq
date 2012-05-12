@@ -3,11 +3,31 @@
 == "Diablo 3" data mining
 Parsing data out of Diablo 3.
 
-== Working
-  * Parsing the StringList
+== Requirements
+  If you want to extract MPQs, you need:
+  * https://launchpad.net/smpq
 
 == NOTE
   * No data is provided in this repo.
   * You need to read the MPQs by yourself for parsing!
-  * (Hint: hava a look at the spec/integration/ dir)
+
+== Setup:
+
+Copy the MPQ-Directory to your working directory:
+
+  cd /foo/bar
+  cp -r <path-to-mpqs>/* /foo/bar/mpqs/*
+
+== CommandLine-Usage:
+
+  cd /foo/bar
+
+  # Help
+  d3_mpq --help
+
+  # Extract MPQs
+  d3_mpq extract enUS_Text
+
+  # Create a CSV
+  d3_mpq --csv-input extracted_mpqs/GameBalance/ItemTypes.gam csv ItemTypes
 

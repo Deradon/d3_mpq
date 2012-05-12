@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+
+require 'd3_mpq/commands'
+

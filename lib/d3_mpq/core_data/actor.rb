@@ -1,13 +1,5 @@
 module D3MPQ::CoreData
-  class Actor < BinData::Record
-    endian :little
-
-    hide    :mpg_id
-    uint32  :mpg_id
-
-    uint32  :check_value => 267
-    zeroes  :length => 2
-
+  class Actor < D3MPQ::MPQ
     uint32  :actor_id#0x014	DWord appMpqId;	// The MPQ Id of the corresponding Appearance file
 
     unknown :length => 21#0x018	DWord unknown2[16];	// ???

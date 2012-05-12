@@ -1,55 +1,45 @@
 module D3MPQ
-  class StringList < BinData::Record
+  class StringListEntry < BinData::Record# :nodoc:
     endian  :little
-    hide    :header_items
 
-    uint32  :magic_number
-    uint32  :d3_file_type
+    zeroes  :length => 0x2
+    uint32  :raw_string_offset
+    uint32  :string_length
 
-    # TODO
-    skip    :length => 0x20
+    def string_offset; raw_string_offset + 16; end
+  end
 
-    uint32  :file_header_size
-    uint32  :header_size
 
-    array :header_items, :initial_length => lambda{ header_size / 0x50 } do
-      zeroes :length => 0x2
+  class StringList < MPQ
+    struct :stl_header do
+      uint32  :file_id
+      zeroes  :length => 5
+      uint32  :stl_header_size
+      uint32  :entries_size
+      zeroes  :length => 2
+    end
 
-      array :my_dummy, :initial_length => lambda{ 4 } do
-        zeroes  :length => 0x2
-        uint32  :item_address
-        uint32  :item_length
+    # Returns: amount of STL::Items defined
+    def num_entries
+      stl_header.entries_size / 0x50
+    end
+
+    hide  :stl_entries
+    array :stl_entries, :initial_length => :num_entries do
+      array :strings, :type => :string_list_entry, :initial_length => 4
+      4.times { |i| uint32 "ui#{i}" }
+    end
+
+
+    array :content, :initial_length => :num_entries do
+      4.times do |i|
+        string  "string#{i}",
+                :read_length    => lambda { stl_entries[index][:strings][i].string_length },
+                :adjust_offset  => lambda { stl_entries[index][:strings][i].string_offset },
+                :trim_padding   => true
       end
-
-      # TODO
-      skip  :length => 0x08
     end
 
-    # TODO
-    string  :read_length => 0x08
-
-    # Content
-    array :content, :initial_length => lambda{ header_items.length } do
-      string  :identifier,
-              :read_length    => lambda{header_items[index][:my_dummy][0].item_length },
-              :adjust_offset  => lambda{header_items[index][:my_dummy][0].item_address + 16 },
-              :trim_padding   => true
-
-      string  :name,
-              :read_length    => lambda{header_items[index][:my_dummy][1].item_length },
-              :adjust_offset  => lambda{header_items[index][:my_dummy][1].item_address + 16 },
-              :trim_padding   => true
-
-      string  :string3,
-              :read_length    => lambda{header_items[index][:my_dummy][2].item_length },
-              :adjust_offset  => lambda{header_items[index][:my_dummy][2].item_address + 16 },
-              :trim_padding   => true
-
-      string  :string4,
-              :read_length    => lambda{header_items[index][:my_dummy][3].item_length },
-              :adjust_offset  => lambda{header_items[index][:my_dummy][3].item_address + 16 },
-              :trim_padding   => true
-    end
 
     hide  :rest
     rest  :rest

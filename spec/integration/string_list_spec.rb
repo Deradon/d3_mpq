@@ -15,7 +15,7 @@ describe D3MPQ::StringList, :integration => true do
     temp_file.close
 
     if size == 0
-      warn "[EMPTY FILE]#{f}"
+#      warn "[EMPTY FILE]#{f}"
       next
     end
 
