@@ -9,14 +9,23 @@ module D3MPQ::CoreData::GameBalance
               :read_length  => 0x100,
               :trim_padding => true
 
-#      zeroes
+      uint32  :source
+      uint32  :level
+      uint32  :gold_cost
+      uint32  :slot
 
-      # lot of ints
-      109.times do |i|
-        uint32  "ui#{i}".intern
+      zeroes
+
+      mod_codes :mod_codes, :initial_length => 16
+
+      uint32  :num_mats
+
+      3.times do |i|
+        uint32  "mats#{i}_hash"
+        uint32  "mats#{i}_num"
       end
 
-#      zeroes  :length => 1
+      zeroes
     end
   end
 end
