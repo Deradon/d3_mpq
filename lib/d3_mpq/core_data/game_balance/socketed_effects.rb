@@ -8,30 +8,13 @@ module D3MPQ::CoreData::GameBalance
               :read_length  => 0x100,
               :trim_padding => true
 
-      uint32  :ref1
-      uint32  :ref2
+      uint32  :item_hash        # item_socketed
+      uint32  :item_type_hash   # item_type_to_socket
 
       zeroes
-      uint32  :ui1
-      uint32  :ui1b
-      zeroes  :length => 2
-      uint32  :ui2
-      uint32  :ui3
-      uint32  :ui3b
-      uint32  :ui3c
-      zeroes  :length => 2
-      uint32  :ui4
-      uint32  :ui4b
-      ffs     :length => 2
-      zeroes  :length => 2
-      uint32  :ui5
-      zeroes
+      mod_codes :mod_codes, :initial_length => 5
 
-      # TODO
-      skip    :length => 48
-
-
-      string  :name2,
+      string  :nls_key,
               :read_length  => 0x100,
               :trim_padding => true
 

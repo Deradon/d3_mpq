@@ -9,6 +9,7 @@ module D3MPQ
     require 'd3_mpq/csv_generator/item_types'
     require 'd3_mpq/csv_generator/recipe_details'
     require 'd3_mpq/csv_generator/recipes'
+    require 'd3_mpq/csv_generator/socketed_effects'
     require 'd3_mpq/csv_generator/string_list'
   end
 end
