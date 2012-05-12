@@ -1,20 +1,18 @@
 module D3MPQ::CoreData
   class Actor < D3MPQ::MPQ
-    uint32  :actor_id#0x014	DWord appMpqId;	// The MPQ Id of the corresponding Appearance file
+    uint32  :actor_id
 
-    unknown :length => 21#0x018	DWord unknown2[16];	// ???
+    unknown :length => 21
 
     hide    :var_data_offset, :var_data_length
     uint32  :var_data_offset, :check_value => 864
     uint32  :var_data_length
-    unknown :length => 13#0x060	DWord unknown3[13];	// ???
+    unknown :length => 13
 
-    string  :name, :length => 64, :trim_padding => true#0x094	char string[64];	// string
+    string  :name, :length => 64, :trim_padding => true
 
-    unknown :length => 133#0x0D4	DWord unknown4[143];	// ???
+    unknown :length => 143
 
-#    zeroes
-    uint32  :image_hash_before
     uint32  :image_hash_dh_male
     uint32  :image_hash_dh_female
     uint32  :image_hash_barb_male
@@ -25,23 +23,11 @@ module D3MPQ::CoreData
     uint32  :image_hash_wd_female
     uint32  :image_hash_monk_male
     uint32  :image_hash_monk_female
-    uint32  :image_hash_after
 
-    unknown :length => 17# 0x338	DWord unknown4[10];	// could be related to class/gender?
-
-#    array :var_data,
-#          :initial_length => lambda { var_data_length / 4 },
-#          :adjust_offset  => lambda { var_data_offset + 16 }  do
-#      uint32
-#    end
-
-#    hide   :var_data
-#    string :var_data, :length => lambda { var_data_length / 4 },
-#                      :adjust_offset  => lambda { var_data_offset + 16 }
+    unknown :length => 10
 
     hide  :rest
     rest  :rest
-
   end
 end
 

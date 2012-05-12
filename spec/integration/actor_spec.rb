@@ -17,7 +17,18 @@ describe D3MPQ::CoreData::Actor, :integration => true do
 #  dir.entries.sort.each do |f|
 #    next if f == "." || f == ".."
 
+  actors.delete_if do |a|
+    temp_file = File.new(a)
+    size = temp_file.size
+    temp_file.close
 
+    if size == 0
+      warn "[SKIP] #{a}"
+      true
+    else
+      false
+    end
+  end
 #    file = File.join(dir, f)
 
 #    temp_file = File.new(file)
