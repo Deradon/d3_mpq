@@ -41,7 +41,7 @@ module D3MPQ::CoreData::GameBalance
       uint32  :durability_min
       uint32  :durability_delta
       uint32  :base_item_hash
-      uint32  :set_item_bonusses
+      uint32  :setitem_bonus
       uint32  :salvage_common
       uint32  :salvage_magic
       uint32  :salvage_rare
@@ -59,15 +59,15 @@ module D3MPQ::CoreData::GameBalance
       zeroes  :length => 0x15
 
       # Armor
-      float   :armor_minimum
-      float   :armor_variable
+      float   :armor_min
+      float   :armor_delta
       zeroes  :length => 0x2A
 
       # Speed
       float   :attacks_per_second
       zeroes  :length => 21
-      float   :min_damage_mod
-      float   :max_damage_mod
+      float   :damage_mod_min
+      float   :damage_mod_delta
       zeroes  :length => 26
 
       # Unknown
@@ -94,22 +94,24 @@ module D3MPQ::CoreData::GameBalance
       end
 
       ffs     :length => 3
-      uint32  :enchants
+      uint32  :enhancement
 
       # Legendary Affixes
+      uint32  :affix0_id
       uint32  :affix1_id
       uint32  :affix2_id
       uint32  :affix3_id
       uint32  :affix4_id
       uint32  :affix5_id
-      ffs
+      uint32  :affix0_level
       uint32  :affix1_level
       uint32  :affix2_level
       uint32  :affix3_level
       uint32  :affix4_level
       uint32  :affix5_level
 
-      zeroes  :length => 7
+
+      zeroes  :length => 6
 
       uint32  :gem_type
       uint32  :crafting_mat_tier

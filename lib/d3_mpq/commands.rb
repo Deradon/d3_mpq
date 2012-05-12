@@ -82,6 +82,8 @@ You need to provide the GeneratorClass:
 Example: d3_mpq --csv-input extracted_mpqs/StringList/ csv StringList
 
 * Actor
+* AffixList
+* Items
 * ItemTypes
 * StringList
 

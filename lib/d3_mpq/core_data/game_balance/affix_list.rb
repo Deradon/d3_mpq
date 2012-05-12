@@ -18,13 +18,13 @@ module D3MPQ::CoreData::GameBalance
       uint32  :u03
       uint32  :u04
       uint32  :u05
-      uint32  :p01
-      uint32  :p02
+      uint32  :param1
+      uint32  :param2
       uint32  :rare_name_prefix_id
       uint32  :rare_name_suffix_id
       uint32  :group_hash
       uint32  :group_hash2
-      uint32  :ressource_or_class
+      uint32  :class_id
       uint32  :resource_type_hash
       uint32  :u06
 

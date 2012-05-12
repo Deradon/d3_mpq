@@ -68,11 +68,11 @@ class ModCode < BinData::Record
     end
 
     def min
-      @value.min
+      @value ? @value.min : nil
     end
 
     def max
-      @value.max
+      @value ? @value.max : nil
     end
 
     def push(item)
@@ -98,6 +98,7 @@ class ModCode < BinData::Record
     # Lets go
     def parse
       return @value if @value
+      return nil if @data.empty?
 
       next_op = true
       @data.each_with_index do |dword, index|
