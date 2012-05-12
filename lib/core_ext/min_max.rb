@@ -23,6 +23,8 @@ class MinMax
 
   # HACK: use a more clever solution
   def /(oth)
+    raise "We can not divide by a range of: #{oth.min} to #{oth.max}" if (oth.min * oth.max) < 0
+
     v = possible_values(self, oth){ |a, b| a / b }
     MinMax.new(v.min, v.max)
   end

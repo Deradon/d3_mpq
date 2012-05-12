@@ -8,6 +8,7 @@ module D3MPQ::CSVGenerator
       :actor_id           => :actor_id,
       :item_type_hash     => :item_type_hash,
       :lvl                => :item_level,
+      :lvl2               => :ilvl2,
       :random_affixes     => :num_random_affixes,
       :max_sockets        => :num_sockets,
       :max_stacksize      => :stack_size,

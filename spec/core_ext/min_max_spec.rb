@@ -57,6 +57,13 @@ describe MinMax do
   describe "#/" do
     specify { (a / b).min.should == 1.to_f/4 }
     specify { (a / b).max.should == 2.to_f/3 }
+
+    context "dividing by possible zero value" do
+      let(:a) { MinMax.new(1.0, 3.0) }
+      let(:b) { MinMax.new(-4.0, 4.0) }
+
+      specify { expect { a / b }.to raise_error }
+    end
     pending "Add TestCases for edges"
   end
 end
