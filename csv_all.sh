@@ -14,6 +14,9 @@ d3_mpq --csv-input extracted_mpqs/GameBalance/ItemEnhancements.gam csv ItemEnhan
 echo "Generating SetItemBonuses.csv ..."
 d3_mpq --csv-input extracted_mpqs/GameBalance/SetItemBonuses.gam csv SetItemBonuses
 
+echo "Generating RareNames.csv ..."
+d3_mpq --csv-input extracted_mpqs/GameBalance/RareNames.gam csv RareNames
+
 echo "Generating Recipes*.csv ..."
 d3_mpq --csv-input extracted_mpqs/GameBalance/RecipesBlacksmith.gam  --csv-name RecipesBlacksmith csv Recipes
 d3_mpq --csv-input extracted_mpqs/GameBalance/RecipesJeweler.gam  --csv-name RecipesJeweler csv Recipes
