@@ -1,7 +1,5 @@
 require 'bindata'
 require 'bindata_ext/dsl'
-require 'bindata_ext/mod_code'
-require 'bindata_ext/mod_codes'
 
 require 'core_ext/min_max'
 require 'core_ext/string'
