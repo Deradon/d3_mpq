@@ -13,9 +13,18 @@ module D3MPQ::CoreData::GameBalance
       uint32  :ui3
       uint32  :ui4
       uint32  :ui5
+      uint32  :ui6
+      uint32  :ui7
+      uint32  :ui8
+      uint32  :ui9
 
-      # TODO
-      skip    :length => 0x210 - 16
+      mod_codes :mod_codes, :initial_length => 20
+
+      uint32 :ref1
+      uint32 :ref2
+      uint32 :ref3
+      uint32 :ref4
+
     end
   end
 end

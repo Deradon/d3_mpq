@@ -8,6 +8,8 @@ module D3MPQ
     require 'd3_mpq/csv_generator/item_enhancements'
     require 'd3_mpq/csv_generator/items'
     require 'd3_mpq/csv_generator/item_types'
+    require 'd3_mpq/csv_generator/monster_affixes'
+    require 'd3_mpq/csv_generator/monster_levels'
     require 'd3_mpq/csv_generator/monster_names'
     require 'd3_mpq/csv_generator/power_formula_tables'
     require 'd3_mpq/csv_generator/rare_names'

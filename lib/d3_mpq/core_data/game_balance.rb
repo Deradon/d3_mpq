@@ -14,6 +14,7 @@ module D3MPQ::CoreData
     require "d3_mpq/core_data/game_balance/item_types"
     require "d3_mpq/core_data/game_balance/labels_global"
     require "d3_mpq/core_data/game_balance/monster_affixes"
+    require "d3_mpq/core_data/game_balance/monster_levels"
     require "d3_mpq/core_data/game_balance/monster_names"
     require "d3_mpq/core_data/game_balance/power_formula_tables"
     require "d3_mpq/core_data/game_balance/rare_names"
