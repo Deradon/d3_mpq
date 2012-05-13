@@ -35,3 +35,6 @@ d3_mpq --csv-input extracted_mpqs/StringList/ --locale enUS csv StringList
 echo "Generating SocketedEffects.csv ..."
 d3_mpq --csv-input extracted_mpqs/GameBalance/SocketedEffects.gam csv SocketedEffects
 
+echo "Generating PowerFormulaTables.csv ..."
+d3_mpq --csv-input extracted_mpqs/GameBalance/PowerFormulaTables.gam csv PowerFormulaTables
+

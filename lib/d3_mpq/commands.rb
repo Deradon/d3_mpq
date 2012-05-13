@@ -86,6 +86,7 @@ Example: d3_mpq --csv-input extracted_mpqs/StringList/ csv StringList
 * Items
 * ItemEnhancements
 * ItemTypes
+* PowerFormulaTables
 * RareNames
 * Recipes
 * RecipeDetails

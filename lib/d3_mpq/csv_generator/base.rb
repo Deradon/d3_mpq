@@ -99,8 +99,17 @@ module D3MPQ::CSVGenerator
     end
 
     def csv_keys
-      map_to_csv.keys.join(SEPERATOR)
+      if map_to_csv
+        map_to_csv.keys.join(SEPERATOR)
+      else
+        raise "Not Implemented"
+      end
     end
+
+#    def fields_from_mpq_reader
+#      fields = MPQ_READER.fields.fields.map { |e| e.name }
+#      if fields.include?
+#    end
 
 
     def subject_to_csv_line(subject, filename, base = nil, index = nil)

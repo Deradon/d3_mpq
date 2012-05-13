@@ -4,9 +4,11 @@ module D3MPQ
 
     require 'd3_mpq/csv_generator/actor'
     require 'd3_mpq/csv_generator/affix_list'
+    require 'd3_mpq/csv_generator/experience_table'
     require 'd3_mpq/csv_generator/item_enhancements'
     require 'd3_mpq/csv_generator/items'
     require 'd3_mpq/csv_generator/item_types'
+    require 'd3_mpq/csv_generator/power_formula_tables'
     require 'd3_mpq/csv_generator/rare_names'
     require 'd3_mpq/csv_generator/recipe_details'
     require 'd3_mpq/csv_generator/recipes'

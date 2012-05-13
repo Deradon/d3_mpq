@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    d3_mpq (0.0.11)
+    d3_mpq (0.0.12)
       bindata
       nokogiri
 

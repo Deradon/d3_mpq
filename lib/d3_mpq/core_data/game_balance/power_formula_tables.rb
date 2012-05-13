@@ -10,7 +10,7 @@ module D3MPQ::CoreData::GameBalance
       zeroes  :length => 192
 
       61.times do |i|
-        float  "fp#{i}".intern
+        float  "level_#{i}".intern
       end
     end
   end
