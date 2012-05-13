@@ -38,3 +38,6 @@ d3_mpq --csv-input extracted_mpqs/GameBalance/SocketedEffects.gam csv SocketedEf
 echo "Generating PowerFormulaTables.csv ..."
 d3_mpq --csv-input extracted_mpqs/GameBalance/PowerFormulaTables.gam csv PowerFormulaTables
 
+echo "Generating MonsterNames.csv ..."
+d3_mpq --csv-input extracted_mpqs/GameBalance/MonsterNames.gam csv MonsterNames
+
