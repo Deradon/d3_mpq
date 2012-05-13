@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ModCode do
+describe D3MPQ::ModCode do
   io = File.open("spec/fixtures/CoreData/GameBalance/AffixList.gam")
 
   # TODO: We use Affixes as example ModCodes, change this

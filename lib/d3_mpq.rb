@@ -9,6 +9,8 @@ require 'core_ext/string'
 module D3MPQ
   require 'd3_mpq/analyzer'
   require 'd3_mpq/attributes'
+  require 'd3_mpq/mod_code'
+  require 'd3_mpq/mod_codes'
   require 'd3_mpq/mod_code_analyzer'
   require 'd3_mpq/mpq'
 

@@ -13,7 +13,7 @@ describe D3MPQ::CoreData::GameBalance::AffixList do
   its(:rest) { should == "" }
 
   describe "content#mod_codes" do
-    specify { mod_codes.should be_kind_of(ModCodes) }
+    specify { mod_codes.should be_kind_of(D3MPQ::ModCodes) }
   end
 end
 
