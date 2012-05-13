@@ -20,6 +20,9 @@ module D3MPQ
         write_stringlist
       when "d3mpq_recipe"
         write_recipe
+      when "d3mpq_coredata_gamebalance_setitembonuses"
+        @field = nil
+        write_recipe
       when "d3mpq_attributes"
         write_single_file("analyze")
       when "d3mpq_coredata_actor"

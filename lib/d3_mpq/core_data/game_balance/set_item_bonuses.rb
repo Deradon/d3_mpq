@@ -8,13 +8,14 @@ module D3MPQ::CoreData::GameBalance
               :read_length  => 0x100,
               :trim_padding => true
 
-      skip  :length => 0xD0 - 4
+      uint32  :parent_set_hash
+      uint32  :num_of_set
+
+      zeroes
+
+      mod_codes :mod_codes, :initial_length => 8
     end
 
-#    # Rest
-#    194.times do |i|
-#      float "fp#{i}".intern
-#    end
   end
 end
 
