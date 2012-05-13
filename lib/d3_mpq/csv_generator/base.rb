@@ -23,23 +23,21 @@ module D3MPQ::CSVGenerator
     class << self
       # TODO: refactor
       def map_to_csv(options = nil)
-        if options
-          if options.is_a?(Array)
-            @map_to_csv = {}
-            options.each do |e|
-              if e.is_a?(String) || e.is_a?(Symbol)
-                @map_to_csv[e.intern] = e.intern
-              else
-                @map_to_csv[e.to_a[0].intern] = e.to_a[1]
-              end
+        return @map_to_csv unless options
+
+        if options.is_a?(Array)
+          @map_to_csv = {}
+          options.each do |e|
+            if e.is_a?(String) || e.is_a?(Symbol)
+              @map_to_csv[e.intern] = e.intern
+            else
+              @map_to_csv[e.to_a[0].intern] = e.to_a[1]
             end
-          elsif options.is_a?(Hash)
-            @map_to_csv = options
-          else
-            raise "Options must be an Array or Hash."
           end
+        elsif options.is_a?(Hash)
+          @map_to_csv = options
         else
-          @map_to_csv
+          raise "Options must be an Array or Hash."
         end
       end
     end
@@ -123,6 +121,7 @@ module D3MPQ::CSVGenerator
             entry = subject.send(opt)
           end
 
+          entry = entry.to_s if entry.is_a?(BinData::String)
           if entry.is_a?(String)
             entry.gsub!('"', '\"')
             entry = "\"#{entry}\""
