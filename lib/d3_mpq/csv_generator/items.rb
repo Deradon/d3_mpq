@@ -45,6 +45,7 @@ module D3MPQ::CSVGenerator
     6.times do |i|
       map["affixgroup#{i}".intern] = "affix#{i}_id".intern
       map["affixlevel#{i}".intern] = "affix#{i}_level".intern
+      map["affix#{i}_is_secondary".intern] = "affix#{i}_secondary".intern
     end
 
     16.times do |i|

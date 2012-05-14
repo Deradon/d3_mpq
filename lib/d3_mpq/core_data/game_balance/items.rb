@@ -110,12 +110,12 @@ module D3MPQ::CoreData::GameBalance
       uint32  :affix3_level
       uint32  :affix4_level
       uint32  :affix5_level
-      uint32  :u11
-      uint32  :u12
-      uint32  :u13
-      uint32  :u14
-      uint32  :u15
-      uint32  :u16
+      uint32  :affix0_secondary
+      uint32  :affix1_secondary
+      uint32  :affix2_secondary
+      uint32  :affix3_secondary
+      uint32  :affix4_secondary
+      uint32  :affix5_secondary
 
       uint32  :gem_type
       uint32  :crafting_mat_tier
