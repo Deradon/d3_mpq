@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ModCode, :integration => true do
+describe D3MPQ::ModCode, :integration => true do
   io = File.open("spec/fixtures/CoreData/GameBalance/AffixList.gam")
 
   # We use Affixes as example ModCodes

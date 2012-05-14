@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe D3MPQ::ModCode do
-  subject { ModCode.new }
+  subject { D3MPQ::ModCode.new }
 
   specify { subject.respond_to?(:mod_code).should be_true }
   specify { subject.respond_to?(:mod_param1).should be_true }

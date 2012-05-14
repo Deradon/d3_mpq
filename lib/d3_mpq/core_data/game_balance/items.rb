@@ -50,8 +50,9 @@ module D3MPQ::CoreData::GameBalance
       zeroes
 
       uint32  :u09 #town scroll etc.
+      uint32  :u09b
 
-      zeroes  :length => 0x18
+      zeroes  :length => 0x17
 
       # Damage
       float   :weapong_damage_min
@@ -109,9 +110,12 @@ module D3MPQ::CoreData::GameBalance
       uint32  :affix3_level
       uint32  :affix4_level
       uint32  :affix5_level
-
-
-      zeroes  :length => 6
+      uint32  :u11
+      uint32  :u12
+      uint32  :u13
+      uint32  :u14
+      uint32  :u15
+      uint32  :u16
 
       uint32  :gem_type
       uint32  :crafting_mat_tier
