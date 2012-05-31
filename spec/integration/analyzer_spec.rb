@@ -26,7 +26,6 @@ describe D3MPQ::Analyzer, :integration => true do
 #    D3MPQ::CoreData::GameBalance::ItemDropTable     => "#{game_balance}ItemDropTable.gam",
     D3MPQ::CoreData::GameBalance::ItemEnhancements  => "#{game_balance}ItemEnhancements.gam",
     D3MPQ::CoreData::GameBalance::Items             => items,
-    D3MPQ::CoreData::GameBalance::LegacyItems       => legacy_items,
     D3MPQ::CoreData::GameBalance::LabelsGlobal      => "#{game_balance}LabelsGlobal.gam",
     D3MPQ::CoreData::GameBalance::MonsterAffixes    => "#{game_balance}MonsterAffixes.gam",
     D3MPQ::CoreData::GameBalance::MonsterNames      => "#{game_balance}MonsterNames.gam",
