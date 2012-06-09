@@ -20,7 +20,7 @@ module D3MPQ::CSVGenerator
       :primary_group_hash => :primary_group_hash
     }
 
-    32.times do |i|
+    16.times do |i|
       map["itemgroup_hash#{i}".intern] = "igh#{i}".intern
     end
 
